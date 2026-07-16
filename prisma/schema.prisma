@@ -1,0 +1,217 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ConsentStatus {
+  GRANTED
+  DECLINED
+  REVOKED
+}
+
+enum MessageDirection {
+  INBOUND
+  OUTBOUND
+}
+
+enum MessageStatus {
+  QUEUED
+  SENT
+  DELIVERED
+  FAILED
+  CANCELLED
+  RECEIVED
+}
+
+enum Provider {
+  TWILIO
+  VONAGE
+}
+
+model BusinessProfile {
+  id          String   @id @default(cuid())
+  legalName   String
+  industry    String?
+  services    Json
+  serviceArea String?
+  address     String?
+  phone       String?
+  email       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactRequest {
+  id               String   @id @default(cuid())
+  fullName         String
+  email            String
+  phone            String?
+  service          String
+  message          String
+  preferredContact String
+  requestConsent   Boolean
+  marketingSms     Boolean  @default(false)
+  ipHash           String?
+  userAgent        String?
+  createdAt        DateTime @default(now())
+}
+
+model ServiceRequest {
+  id               String   @id @default(cuid())
+  fullName         String
+  email            String
+  phone            String?
+  service          String
+  preferredDate    String?
+  location         String?
+  description      String
+  preferredContact String
+  requestConsent   Boolean
+  marketingSms     Boolean  @default(false)
+  ipHash           String?
+  userAgent        String?
+  createdAt        DateTime @default(now())
+}
+
+model SmsProgram {
+  id           String   @id @default(cuid())
+  name         String
+  active       Boolean  @default(false)
+  campaignType String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model SmsConsentEvent {
+  id                  String        @id @default(cuid())
+  phoneE164           String
+  firstName           String
+  lastName            String
+  email               String?
+  category            String
+  checkboxStatus      Boolean
+  disclosureText      String
+  disclosureVersion   String
+  sourceUrl           String
+  formVersion         String
+  privacyVersion      String
+  smsTermsVersion     String
+  ipHash              String?
+  userAgent           String?
+  status              ConsentStatus
+  revocationStatus    Boolean       @default(false)
+  revocationTimestamp DateTime?
+  revocationSource    String?
+  occurredAt          DateTime      @default(now())
+  createdAt           DateTime      @default(now())
+
+  @@index([phoneE164, occurredAt])
+}
+
+model SmsSuppression {
+  id           String    @id @default(cuid())
+  phoneE164    String    @unique
+  reason       String
+  source       String
+  suppressedAt DateTime  @default(now())
+  releasedAt   DateTime?
+  active       Boolean   @default(true)
+}
+
+model Message {
+  id                String               @id @default(cuid())
+  provider          Provider
+  direction         MessageDirection
+  phoneE164         String
+  bodyRedacted      String
+  category          String?
+  status            MessageStatus        @default(QUEUED)
+  providerMessageId String?
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+  statusEvents      MessageStatusEvent[]
+
+  @@index([phoneE164, status])
+}
+
+model MessageStatusEvent {
+  id              String        @id @default(cuid())
+  messageId       String
+  message         Message       @relation(fields: [messageId], references: [id])
+  status          MessageStatus
+  providerEventId String?       @unique
+  detail          Json?
+  createdAt       DateTime      @default(now())
+}
+
+model ProviderCredential {
+  id               String   @id @default(cuid())
+  provider         Provider
+  label            String
+  encryptedPayload String
+  keyVersion       String
+  active           Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model ProviderRegistration {
+  id                 String   @id @default(cuid())
+  provider           Provider
+  brandId            String?
+  campaignId         String?
+  messagingServiceId String?
+  phoneNumberId      String?
+  status             String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model WebhookEvent {
+  id          String    @id @default(cuid())
+  provider    Provider
+  externalId  String
+  payloadHash String
+  eventType   String
+  processedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@unique([provider, externalId])
+}
+
+model PolicyVersion {
+  id          String   @id @default(cuid())
+  policyType  String
+  version     String
+  effectiveAt DateTime
+  contentHash String
+  createdAt   DateTime @default(now())
+
+  @@unique([policyType, version])
+}
+
+model AuditLog {
+  id           String   @id @default(cuid())
+  actorId      String?
+  action       String
+  resourceType String
+  resourceId   String?
+  ipHash       String?
+  metadata     Json?
+  createdAt    DateTime @default(now())
+}
+
+model AdminUser {
+  id                 String   @id @default(cuid())
+  email              String   @unique
+  passwordHash       String
+  mfaSecretEncrypted String?
+  role               String   @default("REVIEWER")
+  active             Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}

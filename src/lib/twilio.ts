@@ -1,0 +1,3 @@
+import{createHmac,timingSafeEqual}from"node:crypto";
+export function validTwilioSignature(url:string,params:Record<string,string>,signature:string,authToken:string){const payload=url+Object.keys(params).sort().map(k=>k+params[k]).join("");const expected=createHmac("sha1",authToken).update(payload).digest("base64");const a=Buffer.from(expected),b=Buffer.from(signature||"");return a.length===b.length&&timingSafeEqual(a,b)}
+export function twiml(message?:string){const safe=(message||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");return `<?xml version="1.0" encoding="UTF-8"?><Response>${safe?`<Message>${safe}</Message>`:""}</Response>`}

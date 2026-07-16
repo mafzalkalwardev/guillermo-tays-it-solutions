@@ -1,0 +1,2 @@
+import{render,screen}from"@testing-library/react";import{describe,expect,it}from"vitest";import{SmsConsentForm}from"./sms-consent-form";
+describe("SMS consent form",()=>{it("starts with the SMS checkbox unchecked and optional",()=>{render(<SmsConsentForm/>);const checkbox=screen.getByTestId("sms-consent");expect(checkbox).not.toBeChecked();expect(checkbox).not.toBeRequired();expect(screen.getByText(/Consent is not a condition of purchase/i)).toBeInTheDocument()})});

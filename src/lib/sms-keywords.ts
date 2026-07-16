@@ -1,0 +1,2 @@
+export const STOP_WORDS=new Set(["STOP","STOPALL","UNSUBSCRIBE","CANCEL","END","QUIT","REVOKE","OPTOUT","OPT OUT"]);export const HELP_WORDS=new Set(["HELP","INFO"]);export const START_WORDS=new Set(["START","UNSTOP"]);
+export function keywordAction(body:string){const word=body.trim().toUpperCase();if(STOP_WORDS.has(word))return"STOP";if(HELP_WORDS.has(word))return"HELP";if(START_WORDS.has(word))return"START";return"OTHER"}

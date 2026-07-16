@@ -1,0 +1,28 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { ArrowUpRight, Menu, Phone, X } from "lucide-react";
+import { business } from "@/config/business";
+
+const links = [["Home", "/"], ["Company", "/about"], ["IT Services", "/services"], ["Service Area", "/service-area"], ["Support", "/support"], ["Contact", "/contact"]] as const;
+
+export function SiteHeader() {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  return <>
+    <div className="utility-bar"><div className="shell utility-inner"><p><span className="utility-dot" />Managed IT · Cybersecurity · Remote Helpdesk</p><div><a href={`tel:${business.phone.replace(/[^+\d]/g, "")}`}><Phone />{business.phone}</a><Link href="/sms-consent">Customer Care SMS</Link></div></div></div>
+    <header className="site-header">
+      <div className="shell nav-wrap">
+        <Link href="/" className="brand brand-modern" aria-label="Guillermo Tays IT Solutions home"><Image src="/brand/gt-logo.png" width={54} height={54} alt="" priority /><span><strong>GUILLERMO TAYS</strong><small>IT SOLUTIONS</small></span></Link>
+        <button className="menu-button" aria-expanded={open} aria-controls="main-nav" onClick={() => setOpen(!open)}><span className="sr-only">Toggle navigation</span>{open ? <X /> : <Menu />}</button>
+        <nav id="main-nav" aria-label="Main navigation" className={open ? "nav open" : "nav"}>
+          {links.map(([label, href]) => <Link className={pathname === href ? "active" : ""} key={href} href={href} onClick={() => setOpen(false)}>{label}</Link>)}
+          <Link href="/request-service" className="button button-small nav-cta" onClick={() => setOpen(false)}>Request Support <ArrowUpRight /></Link>
+        </nav>
+      </div>
+    </header>
+  </>;
+}

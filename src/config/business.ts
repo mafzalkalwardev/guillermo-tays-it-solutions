@@ -1,0 +1,50 @@
+export const business = {
+  legalName: "GUIELLERMO TAYS LLC",
+  displayName: "Guillermo Tays IT Solutions",
+  dba: "Guillermo Tays IT Solutions",
+  entityType: "California Limited Liability Company",
+  entityNumber: "202355417637",
+  formationDate: "March 3, 2023",
+  formationYear: "2023",
+  website: "https://guillermo-tays-it-solutions.vercel.app",
+  plannedDomain: "https://guillermotaysllc.com",
+  industry: "Professional IT support and technology consulting",
+  servicesSummary: "managed IT services, cybersecurity support, and remote helpdesk services",
+  services: [
+    { name: "Managed IT Services", description: "Proactive network monitoring, device management, and critical security patch coordination for small businesses.", audience: "Small and medium-sized businesses and local professional offices" },
+    { name: "Cybersecurity & Threat Protection", description: "Risk assessments, managed firewall support, security hardening, and automated, redundant data-backup planning.", audience: "Organizations seeking practical protection for business systems and data" },
+    { name: "Remote Helpdesk Support", description: "On-demand technical troubleshooting, software configuration, and desktop support for distributed teams and independent professionals.", audience: "Remote professionals, small teams, and local professional offices" },
+  ],
+  serviceArea: "United States, including the Metro Austin, Texas area",
+  address: "220 East DEFEC, Baytown, TX 77520",
+  phone: "+1 (512) 761-6455",
+  generalEmail: "guillermotaysllc@gmail.com",
+  complianceEmail: "guillermotaysllc@gmail.com",
+  supportHours: "Monday–Friday, 8:00 AM–6:00 PM Central Time; closed weekends",
+  timezone: "Central Time",
+  intendedCustomers: "Small and medium-sized businesses, local professional offices, and independent remote workers",
+  smsReason: "one-to-one IT support ticket updates, scheduled troubleshooting coordination, and direct responses to customer support requests",
+  smsCampaign: {
+    useCase: "CUSTOMER_CARE",
+    promotionalAllowed: false,
+    optInKeywords: ["START"],
+    optOutKeywords: ["STOP", "END", "QUIT", "CANCEL", "UNSUBSCRIBE", "REVOKE", "OPT OUT"],
+    helpKeywords: ["HELP", "INFO"],
+  },
+  providerReviewPending: true,
+  policy: { effectiveDate: "July 15, 2026", lastUpdated: "July 15, 2026", privacyVersion: "2026-07-15", termsVersion: "2026-07-15", smsTermsVersion: "2026-07-15" },
+  forms: { smsConsentVersion: "1.0", serviceRequestVersion: "1.0", contactVersion: "1.0" },
+} as const;
+
+export const smsDisclosure = `By checking this box and submitting the form, you agree to receive recurring customer-care text messages from GUIELLERMO TAYS LLC at the mobile number provided. Messages may include IT support ticket updates, scheduled troubleshooting coordination, service information, and responses to support requests. No marketing or promotional messages are sent through this program. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. Consent is not a condition of purchase.`;
+
+export const launchChecklist = [
+  "Confirm the published IT services, service area, intended customers, and Customer Care SMS use case match actual operations.",
+  "Replace the temporary Gmail address with active company-controlled domain email before messaging-provider review.",
+  "Confirm the published Baytown mailing address and working telephone match provider applications.",
+  "Confirm the LLC is active and in good standing using the California Secretary of State record.",
+  "Confirm the authorized representative controls the messaging-provider account and all legal details match.",
+  "Have qualified counsel review the Privacy Policy, Terms, and SMS Terms.",
+  "Configure PostgreSQL, provider secrets, webhook URLs, administrator MFA, backups, and monitoring.",
+  "Run the complete production test suite and verify affirmative consent, STOP suppression, HELP, and public legal pages.",
+] as const;
