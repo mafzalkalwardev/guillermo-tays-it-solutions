@@ -10,7 +10,7 @@
 
 ## Campaign description
 
-GUIELLERMO TAYS LLC, doing business as Guillermo Tays IT Solutions, sends recurring customer-care text messages to existing clients who affirmatively enroll. Messages are limited to IT support ticket updates, troubleshooting appointment coordination, requested service information, and direct responses to support requests. No marketing, promotional, purchased-list, or automated bulk messages are sent.
+GUIELLERMO TAYS LLC sends recurring customer-care text messages to existing clients who affirmatively enroll. Guillermo Tays IT Solutions is the company's IT-support service brand. Messages are limited to IT support ticket updates, troubleshooting appointment coordination, requested service information, and direct responses to support requests. No marketing, promotional, purchased-list, or automated bulk messages are sent.
 
 ## Opt-in flow
 
@@ -20,23 +20,23 @@ Do not list text-to-join keywords unless `ENABLE_START_KEYWORD=true` and the app
 
 ## Production confirmation message
 
-> Guillermo Tays IT Solutions: You are subscribed to recurring customer-care messages for IT support, service coordination, and appointment updates. Message frequency varies. Message & data rates may apply. Reply HELP for help or STOP to opt out. https://guillermotaysllc.com/sms-terms
+> GUIELLERMO TAYS LLC: You are subscribed to recurring customer-care messages for IT support, service coordination, and appointment updates. Message frequency varies. Message & data rates may apply. Reply HELP for help or STOP to opt out. https://guillermotaysllc.com/sms-terms
 
 ## Sample messages
 
-> Guillermo Tays IT Solutions: Hi [Client Name], IT support ticket #[Ticket Number] was updated. Our technician can call today at [Time]. Reply STOP to opt out.
+> GUIELLERMO TAYS LLC: Hi [Client Name], IT support ticket #[Ticket Number] was updated. Our technician can call today at [Time]. Reply STOP to opt out.
 
-> Guillermo Tays IT Solutions: Hi [Client Name], this confirms your troubleshooting appointment on [Date] at [Time]. Reply HELP for help or STOP to opt out.
+> GUIELLERMO TAYS LLC: Hi [Client Name], this confirms your troubleshooting appointment on [Date] at [Time]. Reply HELP for help or STOP to opt out.
 
 ## Keyword responses
 
-**STOP:** Guillermo Tays IT Solutions: You have been unsubscribed and will receive no further messages from this program.
+**STOP:** GUIELLERMO TAYS LLC: You have been unsubscribed and will receive no further messages from this program.
 
-**HELP:** Guillermo Tays IT Solutions: For help, contact sms@guillermotaysllc.com or +1 (512) 761-6455. Message frequency varies. Msg & data rates may apply. Reply STOP to opt out.
+**HELP:** GUIELLERMO TAYS LLC: For help, contact sms@guillermotaysllc.com. Message frequency varies. Msg & data rates may apply. Reply STOP to opt out.
 
 ## Webhook URLs
 
 - Twilio inbound: `https://guillermotaysllc.com/api/webhooks/twilio/inbound`
 - Vonage Messages inbound: `https://guillermotaysllc.com/api/webhooks/vonage/inbound`
 
-The application validates Twilio request signatures and Vonage HS256 signed-webhook JWTs. Keep `MESSAGING_PROVIDER` unset until a brand, campaign, and sending number are approved. Then choose exactly one provider and add only that provider's production credentials.
+The application validates Twilio request signatures and Vonage HS256 signed-webhook JWTs. Do not submit this campaign yet: first verify the company-controlled telephone number and address, point the custom domain to this deployment, activate domain email, configure PostgreSQL, and complete end-to-end consent and opt-out tests. Keep `MESSAGING_PROVIDER` unset until a brand, campaign, and sending number are approved. Then choose exactly one provider and add only that provider's production credentials.
