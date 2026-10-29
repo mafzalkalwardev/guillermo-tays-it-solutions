@@ -11,8 +11,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(business.website),
   title: { default: `${business.displayName} | Dependable Service. Clear Communication.`, template: `%s | ${business.displayName}` },
   description: `${business.legalName} is a California limited liability company providing confirmed services with clear customer communication.`,
-  applicationName: business.dba,
-  keywords: ["managed IT services", "IT support", "cybersecurity support", "remote helpdesk", "technology consulting", "Baytown IT support", "Austin IT support"],
+  applicationName: business.legalName,
+  keywords: ["managed IT services", "IT support", "cybersecurity support", "remote helpdesk", "technology consulting", "small business IT support"],
   alternates: { canonical: "/" },
   icons: { icon: [{ url: "/brand/gt-logo.png", type: "image/png" }], apple: "/brand/gt-logo.png" },
   robots: { index: true, follow: true },
@@ -21,6 +21,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#102a43" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const structuredData = { "@context": "https://schema.org", "@type": "ProfessionalService", name: business.dba, legalName: business.legalName, url: business.website, logo: `${business.website}/brand/gt-logo.png`, email: business.generalEmail, telephone: business.phone, foundingDate: "2023-03-03", address: { "@type": "PostalAddress", streetAddress: "220 East DEFEC", addressLocality: "Baytown", addressRegion: "TX", postalCode: "77520", addressCountry: "US" }, areaServed: "United States", description: business.servicesSummary };
+  const structuredData = { "@context": "https://schema.org", "@type": "ProfessionalService", name: business.legalName, alternateName: business.serviceBrand, url: business.website, logo: `${business.website}/brand/gt-logo.png`, email: business.generalEmail, foundingDate: "2023-03-03", areaServed: "United States", description: business.servicesSummary };
   return <html lang="en" className={sourceSans.variable} data-scroll-behavior="smooth"><body><a href="#main" className="sr-only">Skip to main content</a><SiteHeader /><main id="main">{children}</main><SiteFooter /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} /></body></html>;
 }

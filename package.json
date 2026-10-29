@@ -14,7 +14,8 @@
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
-    "screenshots": "node scripts/capture-screenshots.mjs"
+    "screenshots": "node scripts/capture-screenshots.mjs",
+    "test:live-contact": "node scripts/test-live-contact.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",

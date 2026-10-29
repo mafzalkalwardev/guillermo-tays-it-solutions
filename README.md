@@ -2,14 +2,14 @@
   <img src="public/brand/gt-logo.png" alt="Guillermo Tays IT Solutions logo" width="132" />
   <h1>GUIELLERMO TAYS LLC</h1>
   <p><strong>Professional IT support, cybersecurity, and technology consulting</strong></p>
-  <p>A production-ready business website with animated experiences, service-request workflows, verifiable SMS consent records, and messaging-provider integration foundations.</p>
+  <p>An animated business website with service-request workflows and customer-care messaging integration foundations.</p>
 
   <p>
-    <a href="https://guillermo-tays-it-solutions.vercel.app"><strong>View Live Website</strong></a>
+    <a href="https://guillermotaysllc.com"><strong>Production Domain</strong></a>
     &nbsp;&middot;&nbsp;
-    <a href="https://guillermo-tays-it-solutions.vercel.app/request-service">Request Service</a>
+    <a href="https://guillermotaysllc.com/request-service">Request Service</a>
     &nbsp;&middot;&nbsp;
-    <a href="https://guillermo-tays-it-solutions.vercel.app/sms-consent">SMS Consent</a>
+    <a href="https://guillermotaysllc.com/sms-consent">SMS Consent</a>
   </p>
 
   <p>
@@ -41,21 +41,28 @@
 
 ## About the project
 
-This repository powers the public website for **GUIELLERMO TAYS LLC**, operating as **Guillermo Tays IT Solutions**. The company provides managed IT services, cybersecurity and threat-protection support, and remote helpdesk assistance to small and medium-sized businesses, professional offices, and independent remote workers.
+This repository powers the public website for **GUIELLERMO TAYS LLC**. **Guillermo Tays IT Solutions** is the company's IT-support service brand. The company offers managed IT services, cybersecurity support, and remote helpdesk assistance to small and medium-sized businesses, professional offices, and independent remote workers.
 
-- **Live site:** [guillermo-tays-it-solutions.vercel.app](https://guillermo-tays-it-solutions.vercel.app)
-- **Service area:** United States, including Metro Austin, Texas
-- **Telephone:** [+1 (512) 761-6455](tel:+15127616455)
-- **Email:** [guillermotaysllc@gmail.com](mailto:guillermotaysllc@gmail.com)
-- **Mailing address:** 220 East DEFEC, Baytown, TX 77520
+- **Production domain:** [guillermotaysllc.com](https://guillermotaysllc.com)
+- **Vercel preview:** [guillermo-tays-it-solutions.vercel.app](https://guillermo-tays-it-solutions.vercel.app)
+- **Service area:** Remote support across the United States
+- **Support:** [support@guillermotaysllc.com](mailto:support@guillermotaysllc.com)
+- **Service requests:** [service@guillermotaysllc.com](mailto:service@guillermotaysllc.com)
+- **Privacy:** [privacy@guillermotaysllc.com](mailto:privacy@guillermotaysllc.com)
+- **SMS help:** [sms@guillermotaysllc.com](mailto:sms@guillermotaysllc.com)
+
+No telephone number or street address is published until company-controlled details are verified against authoritative business records.
 
 ## Highlights
 
 - Premium responsive interface with Framer Motion transitions and scroll-triggered animation
-- Custom logo, browser icon, mobile navigation, service cards, trust sections, calls to action, and OpenStreetMap integration
+- Custom logo, browser icon, mobile navigation, service cards, trust sections, and calls to action
 - Server-processed contact, service-request, and explicit SMS-consent forms
-- Versioned, append-only consent evidence with timestamp, IP hash, disclosure text, and revocation history
-- Twilio inbound STOP, HELP, INFO, and optional START keyword handling
+- Versioned consent-event storage with timestamp, IP hash, disclosure text, and revocation history when PostgreSQL is configured
+- Twilio and Vonage signed inbound webhook handling for STOP, HELP, INFO, and optional START
+- Twilio or Vonage outbound opt-in confirmation with carrier-required disclosures
+- Online SMS opt-out with suppression and queued-message cancellation
+- FormSubmit delivery fallback for contact and service requests when PostgreSQL is unavailable
 - PostgreSQL persistence through Prisma, with graceful contact fallback when the database is not configured
 - Dedicated privacy, terms, SMS terms, acceptable-use, security, accessibility, and support pages
 - Search-engine metadata, structured data, `robots.txt`, sitemap, canonical URLs, and social previews
@@ -138,6 +145,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `DATABASE_URL` | PostgreSQL connection used by Prisma |
 | `IP_HASH_SALT` | Salt used when retaining consent evidence without storing raw IP addresses |
 | `ADMIN_EXPORT_TOKEN` | Protects the consent-export integration endpoint |
+| `MESSAGING_PROVIDER` | Selects `TWILIO` or `VONAGE` after the registered provider is approved |
 | `TWILIO_*` | Server-only Twilio account, messaging service, campaign, and webhook values |
 | `VONAGE_*` | Server-only Vonage application and campaign values |
 | `ENABLE_START_KEYWORD` | Enables START/UNSTOP only when the registered program supports it |
@@ -164,11 +172,11 @@ The current production deployment runs on Vercel. A Docker image is also include
 docker compose up --build
 ```
 
-Before connecting the planned custom domain, update the website URL, provider webhook URL, canonical metadata, and deployment environment values together.
+The custom domain is attached to Vercel, but its Cloudflare website records still point elsewhere. Complete the DNS and mailbox steps in [DOMAIN-SETUP.md](DOMAIN-SETUP.md). Do not submit a messaging-provider application until every blocking item in [ADMIN-CHECKLIST.md](ADMIN-CHECKLIST.md) is complete.
 
 ## Messaging and compliance notice
 
-This application provides implementation foundations for consent capture and customer-care messaging. Deployment does **not** represent approval or endorsement by Twilio, Vonage, The Campaign Registry, mobile carriers, or legal counsel. Provider registration must accurately reflect real business operations, and the production database, webhook validation, working domain email, administrator access controls, monitoring, and legal review must be completed before live messaging.
+This application provides implementation foundations for consent capture and customer-care messaging. Deployment does **not** represent approval or endorsement by Twilio, Vonage, The Campaign Registry, mobile carriers, or legal counsel. Provider registration must accurately reflect real business operations. A verified company-controlled telephone number and address, production database, working domain email, provider configuration, and end-to-end tests are required before live messaging or provider submission.
 
 See [ADMIN-CHECKLIST.md](ADMIN-CHECKLIST.md) for the production-readiness checklist.
 
